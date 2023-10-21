@@ -5,6 +5,7 @@ import * as githubServices from './github.js'
 
 app.use(express.json());
 
+
 app.get('/github/login-url', async (req, res) => {    
     return res.status(200).json({
         url: githubServices.getGithubLoginUrl(),
@@ -13,6 +14,12 @@ app.get('/github/login-url', async (req, res) => {
 
 app.get('/github/callback', async (req, res) => {
     const { code } = req.query
+    console.log(code)
+});
+
+app.post('/github/token', async (req, res) => {
+    const { code } = req.body
+    console.log(code)
     const accessToken = await githubServices.getAccessTokenFromCode(code)
     return res.status(200).json({
         accessToken,
