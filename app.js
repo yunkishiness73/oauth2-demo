@@ -2,9 +2,10 @@ import express from 'express'
 const app = express()
 const port = 3000
 import * as githubServices from './github.js'
+import cors from 'cors'
 
 app.use(express.json());
-
+app.use(cors())
 
 app.get('/github/login-url', async (req, res) => {    
     return res.status(200).json({
